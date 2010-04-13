@@ -136,5 +136,5 @@ com.redfin.FastMarker.prototype.copy = function() {
   while (i--) {
     htmlArrayCopy[i] = htmlArray[i];
   }
-  return new com.redfin.FastMarker(this._id, htmlArrayCopy, this._divClassName, this._zIndex, this._leftOffset, this._topOffset);
+  return new com.redfin.FastMarker(this._id, latLng, htmlArrayCopy, this._divClassName, this._zIndex, this._leftOffset, this._topOffset);
 }
