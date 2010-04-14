@@ -42,7 +42,7 @@
         if (markerType == "gmarker") {
           overlays.push(new google.maps.Marker({position:latlng, map:map}));
         } else if (markerType == "fastmarker") {
-          var marker = new com.redfin.FastMarker(/*id*/i, latlng, ["<div style='height: 31px; width: 31px; background-image: url(\'bluecirclemarker.gif\')'>"]);
+          var marker = new com.redfin.FastMarker(/*id*/i, latlng, ["<div style='height: 31px; width: 31px; background-image: url(\"bluecirclemarker.gif\")'>&nbsp;</div>"]);
           fastMarkers.push(marker);
         }
       }
