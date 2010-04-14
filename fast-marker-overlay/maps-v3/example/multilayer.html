@@ -24,12 +24,16 @@
     var numMarkers = parseInt(document.getElementById("numMarkers").value);
     
     var layer = window[color+"Layer"];
-    var gif;
+    var gif, gifHeight, gifWidth;
 
     if (color == "blue") {
       gif = "bluecirclemarker.gif";
+      gifHeight = "31px";
+      gifWidth = "31px";
     } else {
       gif = "marker.gif";
+      gifHeight = "34px";
+      gifWidth = "20px";
     }
     if (layer) {
       layer.unhide();
@@ -51,7 +55,7 @@
         if (color == "blue") {
           zIndex = "2";
         }
-        var marker = new com.redfin.FastMarker(/*id*/i, latlng, ["<img src='",gif,"' style='cursor: pointer' onclick='alert(", i,")'>"], "markerDiv", zIndex);
+        var marker = new com.redfin.FastMarker(/*id*/i, latlng, ["<div class='",color,"' onclick='alert(", i,")'>&nbsp;</div>"], null, zIndex);
         fastMarkers.push(marker);
     }
 
@@ -72,16 +76,22 @@
 
     </script>
   <style>
-    .markerDiv {
-      padding: 0;
-      margin: 0;
-      height: 31px;
-    }
-    .markerDiv>img {
-      margin: 0;
-      padding: 0;
-      border: 0;
-    }
+  html {
+    /* Address IE6 background flicker */
+    filter: expression(document.execCommand("BackgroundImageCache", false, true));
+  }
+  .blue {
+    height: 31px;
+    width: 31px;
+    background-image: url('bluecirclemarker.gif');
+    cursor: pointer;
+  }
+  .orange {
+    height: 34px;
+    width: 20px;
+    background-image: url('marker.gif');
+    cursor: pointer;
+  }
   </style>
   </head>
   <body onload="initialize()">

@@ -33,7 +33,7 @@
     for (var i = 0; i < numMarkers; i++) {
       var latlng = new google.maps.LatLng(southWest.lat() + latSpan * Math.random(),
                                southWest.lng() + lngSpan * Math.random());
-        var marker = new com.redfin.FastMarker(/*id*/i, latlng, ["<img src='bluecirclemarker.gif' style='cursor: pointer' onclick='alert(", i,")'>"], "markerDiv");
+        var marker = new com.redfin.FastMarker(/*id*/i, latlng, ["<div class='marker' onclick='alert(", i,")'>&nbsp;</div>"], null);
         fastMarkers.push(marker);
     }
 
@@ -51,10 +51,15 @@
 
     </script>
   <style>
-    .markerDiv {
-      padding: 0;
-      margin: 0;
+    html {
+      /* Address IE6 background flicker */
+      filter: expression(document.execCommand("BackgroundImageCache", false, true));
+    }
+    .marker {
       height: 31px;
+      width: 31px;
+      background-image: url('bluecirclemarker.gif');
+      cursor: pointer;
     }
   </style>
   </head>
