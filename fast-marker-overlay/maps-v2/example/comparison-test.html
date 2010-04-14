@@ -45,7 +45,7 @@
       } else if (markerType == "gmarker") {
         map.addOverlay(new GMarker(latlng));
       } else if (markerType == "fastmarker") {
-        var marker = new com.redfin.FastMarker(/*id*/i, latlng, ["<img src='bluecirclemarker.gif'>"]);
+        var marker = new com.redfin.FastMarker(/*id*/i, latlng, ["&nbsp;"], "marker");
         fastMarkers.push(marker);
       }
     }
@@ -55,6 +55,18 @@
   }
 
     </script>
+<style>
+html {
+  /* Address IE6 background flicker */
+  filter: expression(document.execCommand("BackgroundImageCache", false, true));
+}
+.marker {
+  height: 31px;
+  width: 31px;
+  background-image: url('bluecirclemarker.gif');
+}
+</style>
+
   </head>
   <body onload="initialize()" onunload="GUnload()">
     <input type="text" id="numMarkers" value="500"/>
