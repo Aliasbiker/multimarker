@@ -42,7 +42,7 @@
         if (markerType == "gmarker") {
           overlays.push(new google.maps.Marker({position:latlng, map:map}));
         } else if (markerType == "fastmarker") {
-          var marker = new com.redfin.FastMarker(/*id*/i, latlng, ["<img src='bluecirclemarker.gif'>"]);
+          var marker = new com.redfin.FastMarker(/*id*/i, latlng, ["<div style='height: 31px; width: 31px; background-image: url(\'bluecirclemarker.gif\')'>"]);
           fastMarkers.push(marker);
         }
       }
@@ -59,13 +59,13 @@
       delete overlays[i];
     }
   }
-
     </script>
 <style>
 html {
   filter: expression(document.execCommand("BackgroundImageCache", false, true));
 }
 </style>
+
   </head>
   <body onload="initialize()">
     <input type="text" id="numMarkers" value="500"/>
