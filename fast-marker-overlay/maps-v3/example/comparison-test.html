@@ -40,7 +40,7 @@
         var latlng = new google.maps.LatLng(southWest.lat() + latSpan * Math.random(),
                                  southWest.lng() + lngSpan * Math.random());
         if (markerType == "gmarker") {
-          overlays.push(new google.maps.Marker({position:latlng, map:map}));
+          overlays.push(new google.maps.Marker({position:latlng, map:map, flat:true}));
         } else if (markerType == "fastmarker") {
           var marker = new com.redfin.FastMarker(/*id*/i, latlng, ["&nbsp;"], "marker");
           fastMarkers.push(marker);
