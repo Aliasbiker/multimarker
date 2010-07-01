@@ -35,6 +35,7 @@
     var lngSpan = northEast.lng() - southWest.lng();
     var latSpan = northEast.lat() - southWest.lat();
     var fastMarkers = [];
+    var start = new Date().getTime();
     for (var i = 0; i < numMarkers; i++) {
       var latlng = new GLatLng(southWest.lat() + latSpan * Math.random(),
                                southWest.lng() + lngSpan * Math.random());
@@ -52,6 +53,9 @@
     if (markerType == "fastmarker") {
       map.addOverlay(new com.redfin.FastMarkerOverlay(fastMarkers));
     }
+    var end = new Date().getTime();
+    var diff = end - start;
+    document.getElementById('timing').innerHTML = "" + diff + "ms";
   }
 
     </script>
@@ -78,6 +82,7 @@ html {
     <input type="button" onclick="addRandomMarkers()" value="Add Markers"/>
 
     <input type="button" onclick="map.clearOverlays()" value="Clear Markers"/>
+    <span id="timing"></span>
     <div id="map_canvas" style="width: 800px; height: 600px"></div>
   </body>
 </html>
