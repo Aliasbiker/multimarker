@@ -29,15 +29,21 @@
     var northEast = bounds.getNorthEast();
     var lngSpan = northEast.lng() - southWest.lng();
     var latSpan = northEast.lat() - southWest.lat();
+    window.latlngs = [];
     var fastMarkers = [];
     for (var i = 0; i < numMarkers; i++) {
       var latlng = new google.maps.LatLng(southWest.lat() + latSpan * Math.random(),
                                southWest.lng() + lngSpan * Math.random());
-        var marker = new com.redfin.FastMarker(/*id*/i, latlng, ["<div class='marker' onclick='alert(", i,")'>&nbsp;</div>"], null);
+      latlngs[i] = latlng;
+        var marker = new com.redfin.FastMarker(/*id*/i, latlng, ["<div class='marker' onclick='addInfoWindow(", i,")'>&nbsp;</div>"], null);
         fastMarkers.push(marker);
     }
 
     overlays.push(new com.redfin.FastMarkerOverlay(map, fastMarkers));
+  }
+  
+  function addInfoWindow(i) {
+    new google.maps.InfoWindow({position:latlngs[i], content:"marker"+i}).open(window.map);
   }
   
   function clearOverlays() {
