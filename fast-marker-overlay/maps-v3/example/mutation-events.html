@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+ Copyright 2008 Google Inc. 
+ Licensed under the Apache License, Version 2.0: 
+ http://www.apache.org/licenses/LICENSE-2.0 
+ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>MultiMarker FastMarkerOverlay Example: Comparison Test</title>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script>
+    <script src="../src/FastMarkerOverlay.js"></script>  
+    <script type="text/javascript">
+    var map;
+    var overlays = [];
+
+    function initialize() {
+       var latlng = new google.maps.LatLng(37.4419, -122.1419);
+       var myOptions = {
+         zoom: 4,
+         center: latlng,
+         mapTypeId: google.maps.MapTypeId.ROADMAP
+       };
+       var map = window.map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    }
+    
+    function addRandomMarkers() {
+      var numMarkers = parseInt(document.getElementById("numMarkers").value);
+      var markerType = document.getElementById("markerType").value;
+
+      // Add markers to the map at random locations
+      var bounds = map.getBounds();
+      var southWest = bounds.getSouthWest();
+      var northEast = bounds.getNorthEast();
+      var lngSpan = northEast.lng() - southWest.lng();
+      var latSpan = northEast.lat() - southWest.lat();
+      var fastMarkers = [];
+      window.mutationEvents = 0;
+      document.addEventListener("DOMSubtreeModified", function() {window.mutationEvents++});
+      for (var i = 0; i < numMarkers; i++) {
+        var latlng = new google.maps.LatLng(southWest.lat() + latSpan * Math.random(),
+                                 southWest.lng() + lngSpan * Math.random());
+        if (markerType == "gmarker") {
+          overlays.push(new google.maps.Marker({position:latlng, map:map, flat:true}));
+        } else if (markerType == "fastmarker") {
+          var marker = new com.redfin.FastMarker(/*id*/i, latlng, ["&nbsp;"], "marker");
+          fastMarkers.push(marker);
+        }
+      }
+      if (markerType == "fastmarker") {
+        overlays.push(new com.redfin.FastMarkerOverlay(map, fastMarkers));
+      }
+  }
+  
+  function clearOverlays() {
+    var i = overlays.length;
+    while (i--) {
+      var overlay = overlays[i];
+      if (overlay) overlay.setMap(null);
+      delete overlays[i];
+    }
+  }
+    </script>
+<style>
+html {
+  /* Address IE6 background flicker */
+  filter: expression(document.execCommand("BackgroundImageCache", false, true));
+}
+.marker {
+  height: 34px;
+  width: 20px;
+  background-image: url('marker.gif');
+}
+</style>
+
+  </head>
+  <body onload="initialize()">
+    <input type="text" id="numMarkers" value="500"/>
+    <select id="markerType">
+      <option value="gmarker" selected>GMarker</option>
+      <option value="fastmarker">FastMarker</option>
+    </select>
+    <input type="button" onclick="addRandomMarkers()" value="Add Markers"/>
+
+    <input type="button" onclick="clearOverlays()" value="Clear Markers"/>
+    <input type="button" onclick="alert(window.mutationEvents)" value="Show mutation events"/>
+    <div id="map_canvas" style="width: 800px; height: 600px"></div>
+  </body>
+</html>
