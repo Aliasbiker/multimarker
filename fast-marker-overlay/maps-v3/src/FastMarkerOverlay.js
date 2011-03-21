@@ -6,7 +6,7 @@
 
 com = {redfin: {}};
 
-/* Construct a new FastMarkerOverlay layer for a V2 map
+/* Construct a new FastMarkerOverlay layer for a V3 map
  * @constructor
  * @param {google.maps.Map} map the map to which we'll add markers
  * @param {Array.<com.redfin.FastMarker>} markers the array of markers to display on the map
