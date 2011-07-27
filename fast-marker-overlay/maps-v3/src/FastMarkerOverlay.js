@@ -21,7 +21,7 @@ com.redfin.FastMarkerOverlay.prototype = new google.maps.OverlayView();
 com.redfin.FastMarkerOverlay.prototype.onAdd = function() {
   this._div = document.createElement("div");
   var panes = this.getPanes();
-  panes.overlayMouseTarget.appendChild(this._div);
+  panes.floatPane.appendChild(this._div);
 }
 
 /* Copy our data to a new FastMarkerOverlay
